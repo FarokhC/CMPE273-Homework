@@ -1,0 +1,200 @@
+Received 'A:ping' from ('127.0.0.1', 53040)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53046)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53047)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53052)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53057)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53058)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53063)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53072)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53073)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53078)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53083)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53084)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53089)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53094)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53095)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53100)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53105)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53106)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53111)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53116)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53117)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53122)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53127)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53128)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53137)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53142)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53143)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53148)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53153)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53154)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53159)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53164)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53165)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53170)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53175)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53176)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53181)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53187)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53188)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53193)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53202)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53203)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53208)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53213)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53214)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53219)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53224)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53225)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53231)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53236)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53237)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53242)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53247)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53248)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53253)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53258)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53259)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53268)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53274)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53276)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53281)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53286)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53287)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53292)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53297)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53298)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53303)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53308)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53309)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53314)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53319)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53320)
+Send: 'B:ping'
+Received 'A:ping' from ('127.0.0.1', 53325)
+Send: 'A:ping'
+Received 'A:ping' from ('127.0.0.1', 53334)
+Send: 'A:ping'
+Received 'B:ping' from ('127.0.0.1', 53335)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53344)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53353)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53362)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53371)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53380)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53393)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53402)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53411)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53421)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53430)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53444)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53453)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53462)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53471)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53480)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53490)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53504)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53513)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53522)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53531)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53540)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53553)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53562)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53571)
+Send: 'B:ping'
+Received 'B:ping' from ('127.0.0.1', 53580)
+Send: 'B:ping'
