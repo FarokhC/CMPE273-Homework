@@ -1,5 +1,7 @@
 import sqlite3
 import traceback
+import json
+import pickle
 
 DATABASE_FILE = './exam.db'
 
@@ -33,9 +35,7 @@ def add_test_in_db(subject, answer_key):
         test_id = conn.execute(get_latest_test_id_query).fetchall()[0][0]
         print ("test ID: " + str(test_id))
 
-        select_all_query = "SELECT * from TEST_DATA"
-        res = conn.execute(select_all_query).fetchall()
-        print ("database " + str(res))
+        get_database_contents(conn)
 
     except Exception as e:
         raise Exception("Could not get test_id: " + str(e))
@@ -45,7 +45,7 @@ def add_test_in_db(subject, answer_key):
         conn.commit()
         conn.close()
     except Exception as e:
-        raise Exception("Could not commit or close connection: " + str(e))
+        raise Exception("Could not commit or close connection for adding test: " + str(e))
 
     return {
         'test_id': test_id,
@@ -59,8 +59,15 @@ def save_scantron_file(id, scantron_data):
     file_location = str(id) + ".txt"
     return file_location
 
+#Retrieves database contents
+def get_database_contents(conn):
+        select_all_query = "SELECT * from TEST_DATA"
+        res = conn.execute(select_all_query).fetchall()
+        print ("database " + str(res))
+
 #Compares the scantron to the answer key
-def test_scantron(id, name, subject, scantron_data):
+def test_scantron(id, scantron_url, name, subject, scantron_data):
+    submission_result = {}
     try:
         conn = sqlite3.connect(DATABASE_FILE)
 
@@ -74,14 +81,68 @@ def test_scantron(id, name, subject, scantron_data):
 
         res = get_scantron_results(scantron_data, answer_key)
 
+        submission_result['scantron_id'] = id
+        submission_result['scantron_url'] = scantron_url
+        submission_result['name'] = name
+        submission_result['subject'] = subject
+        submission_result['score'] = res['score']
+        submission_result['result'] = res['result']
+
+        write_result_to_db(conn, submission_result)
+
     except Exception as e:
         raise Exception("Could not add scantron to database: " + str(e))
 
-    return res
+    try:
+        conn.commit()
+        conn.close()
+
+    except Exception as e:
+        raise Exception("Could not commit or close connection for test scantron data: " + str(e))
+
+    return submission_result
 
 #Runs OCR and gets the scantron results
 def get_scantron_results(scantron_data, answer_key):
+    #TODO: Implement this function using OCR
     return {
         'result': {},
         'score': 100,
     }
+
+def write_result_to_db(conn, result):
+    try:
+        read_result_query = 'SELECT * FROM TEST_DATA WHERE subject = \'{}\''.format(result['subject'])
+        res = conn.execute(read_result_query).fetchall()
+        print("res: " + str(res))
+        submission_array = res[0][3]
+        # submission_array = submission_array.replace('\'' ,'\"').replace('\\', '')
+
+        submission_array = json.loads(submission_array.replace('\'', '\"'))
+        print("Old submission array: " + str(submission_array))
+        #TODO: Handle case where the user tests same scantron multiple times
+        submission_array.append(result)
+        submission_array = json.dumps(submission_array).replace('\"', '\'')
+        # submission_array = json.dumps(submission_array)
+
+        print("Submission_array: " + str(submission_array))
+        submission_array.encode('utf-8')
+        write_result_query = 'UPDATE TEST_DATA SET submissions = \"{}\" WHERE subject = \"{}\"'.format(submission_array, result['subject'])
+
+        print("Write result query: " + str(write_result_query))
+        conn.execute(write_result_query)
+        conn.commit()
+
+        get_database_contents(conn)
+
+    except Exception as e:
+        raise Exception("Could not write submission result to db: " + str(e))
+
+#Returns all of the scantron results for a certain test id
+def get_all_scantron_results(test_id):
+        conn = sqlite3.connect(DATABASE_FILE)
+        get_database_contents(conn)
+        read_result_query = 'SELECT * FROM TEST_DATA WHERE test_id = {}'.format(test_id)
+        res = conn.execute(read_result_query).fetchall()
+        print("res: " + str(res))
+        return res

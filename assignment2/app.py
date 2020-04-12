@@ -95,10 +95,12 @@ def uploadScantron(id):
     subject = request.args.get('subject')
     scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
 
+    print("Scantron data: " + scantron_data)
+
     scantron_url = utilities.save_scantron_file(id, scantron_data)
 
     #Do logic to upload scantron here
-    res = utilities.test_scantron(id, name, subject, scantron_data)
+    res = utilities.test_scantron(id, scantron_url, name, subject, scantron_data)
 
     response  = {}
     response['scantron_id'] = id
@@ -157,11 +159,13 @@ Response
 def checkAllScantrons(id):
     #Do logic to scan scantron here
 
+    res = utilities.get_all_scantron_results(id)
+
     response  = {}
-    response['test_id'] = id
-    response['subject'] = "subject"
-    response['answer_keys'] = {}
-    response['submissions'] = []
+    response['test_id'] = res[0][0]
+    response['subject'] = res[0][1]
+    response['answer_keys'] = res[0][2]
+    response['submissions'] = res[0][3]
 
     return response
 
