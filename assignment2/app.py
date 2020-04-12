@@ -91,17 +91,22 @@ Response
 """
 @app.route('/api/tests/<id>/scantrons', methods = ["POST"])
 def uploadScantron(id):
+    name = request.args.get('name')
+    subject = request.args.get('subject')
     scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
 
+    scantron_url = utilities.save_scantron_file(id, scantron_data)
+
     #Do logic to upload scantron here
+    res = utilities.test_scantron(id, name, subject, scantron_data)
 
     response  = {}
-    response['scantron_id'] = 1
-    response['scantron_url'] = 1
-    response['name'] = 1
-    response['subject'] = 1
-    response['score'] = 1
-    response['result'] = 1
+    response['scantron_id'] = id
+    response['scantron_url'] = scantron_url
+    response['name'] = name
+    response['subject'] = subject
+    response['score'] = res['score']
+    response['result'] = res['result']
 
     return response, 201
 
