@@ -1,4 +1,5 @@
 from flask import Flask, escape, request, Blueprint
+import utilities
 
 app = Flask(__name__)
 
@@ -38,20 +39,22 @@ Response
 """
 @app.route('/api/tests', methods = ["POST"])
 def createTest():
-    test_id = request.args.get('test_id')
     subject = request.args.get('subject')
-    answer_keys = request.args.get('answer_keys')
-    submissions = request.args.get('submissions')
+    answer_key = request.args.get('answer_key')
 
     #Do logic to create tests here
+    try:
+        ret = utilities.add_test_in_db(subject, answer_key)
+        response = {}
+        response['test_id'] = ret['test_id']
+        response['subject'] = ret['subject']
+        response['answer_key'] = ret['answer_key']
+        response['submissions'] = ret['submissions']
 
-    response = {}
-    response['test_id'] = 1
-    response['subject'] = subject
-    response['answer_keys'] = answer_keys
-    response['submissions'] = []
-
-    return response, 201
+        return response, 201
+    except Exception as e:
+        print("Failed to create table or write to table: " + str(e))
+        return 500
 
 """
 Request
