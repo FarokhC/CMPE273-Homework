@@ -38,7 +38,20 @@ Response
 """
 @app.route('/api/tests', methods = ["POST"])
 def createTest():
-    return "createTest"
+    test_id = request.args.get('test_id')
+    subject = request.args.get('subject')
+    answer_keys = request.args.get('answer_keys')
+    submissions = request.args.get('submissions')
+
+    #Do logic to create tests here
+
+    response = {}
+    response['test_id'] = 1
+    response['subject'] = subject
+    response['answer_keys'] = answer_keys
+    response['submissions'] = []
+
+    return response, 201
 
 """
 Request
@@ -75,7 +88,19 @@ Response
 """
 @app.route('/api/tests/<id>/scantrons', methods = ["POST"])
 def uploadScantron(id):
-    return "upload"
+    scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
+
+    #Do logic to upload scantron here
+
+    response  = {}
+    response['scantron_id'] = 1
+    response['scantron_url'] = 1
+    response['name'] = 1
+    response['subject'] = 1
+    response['score'] = 1
+    response['result'] = 1
+
+    return response, 201
 
 """
 Request
@@ -122,7 +147,15 @@ Response
 """
 @app.route('/api/tests/<id>', methods = ['GET'])
 def checkAllScantrons(id):
-    return "tests"
+    #Do logic to scan scantron here
+
+    response  = {}
+    response['test_id'] = id
+    response['subject'] = "subject"
+    response['answer_keys'] = {}
+    response['submissions'] = []
+
+    return response
 
 if __name__ == '__main__':
     app.run()
