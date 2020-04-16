@@ -1,7 +1,12 @@
 from flask import Flask, escape, request, Blueprint
+import os
+
 import utilities
 
 app = Flask(__name__)
+# UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), '/uploadFiles')
+# print("Upload folder: " + UPLOAD_FOLDER)
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 """
 Request
@@ -93,18 +98,31 @@ Response
 def uploadScantron(id):
     name = request.args.get('name')
     subject = request.args.get('subject')
-    scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
+    # scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
+    scantron_data = request.files
+    try:
+        # f = request.files['image']
+        # f.save(f.filename)
+        # print("reached here!!!")
+        pdf_file = request.files['image']
+        # print ("pdf file name: " + pdf_file)
+        # print ("Upload folder: " + app.config['UPLOAD_FOLDER'])
+        save_location = 'uploadFiles'
+        file_location = os.path.join(os.path.join(os.getcwd(), save_location), pdf_file.filename)
+        pdf_file.save(file_location)
 
-    print("Scantron data: " + scantron_data)
+    except Exception as e:
+        print("Failed to upload file: " + str(e))
 
-    scantron_url = utilities.save_scantron_file(id, scantron_data)
+
+    print("Scantron data: " + str(scantron_data))
 
     #Do logic to upload scantron here
-    res = utilities.test_scantron(id, scantron_url, name, subject, scantron_data)
+    res = utilities.test_scantron(id, file_location, name, subject, scantron_data)
 
     response  = {}
     response['scantron_id'] = id
-    response['scantron_url'] = scantron_url
+    response['scantron_url'] = res['scantron_url']
     response['name'] = name
     response['subject'] = subject
     response['score'] = res['score']
@@ -162,10 +180,10 @@ def checkAllScantrons(id):
     res = utilities.get_all_scantron_results(id)
 
     response  = {}
-    response['test_id'] = res[0][0]
-    response['subject'] = res[0][1]
-    response['answer_keys'] = res[0][2]
-    response['submissions'] = res[0][3]
+    response['test_id'] = res['test_id']
+    response['subject'] = res['subject']
+    response['answer_keys'] = res['answer_keys']
+    response['submissions'] = res['submissions']
 
     return response
 

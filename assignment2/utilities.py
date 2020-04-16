@@ -54,11 +54,6 @@ def add_test_in_db(subject, answer_key):
         'submissions': submissions
     }
 
-#Stores the scantron file
-def save_scantron_file(id, scantron_data):
-    file_location = str(id) + ".txt"
-    return file_location
-
 #Retrieves database contents
 def get_database_contents(conn):
         select_all_query = "SELECT * from TEST_DATA"
@@ -144,5 +139,14 @@ def get_all_scantron_results(test_id):
         get_database_contents(conn)
         read_result_query = 'SELECT * FROM TEST_DATA WHERE test_id = {}'.format(test_id)
         res = conn.execute(read_result_query).fetchall()
-        print("res: " + str(res))
-        return res
+
+        ret = {}
+        try:
+            ret['test_id'] = res[0][0]
+            ret['subject'] = res[0][1]
+            ret['answer_keys'] = res[0][2]
+            ret['submissions'] = res[0][3]
+        except Exception as e:
+            raise Exception("The test id does not exist: " + str(e))
+
+        return ret
