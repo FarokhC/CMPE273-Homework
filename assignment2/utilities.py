@@ -150,3 +150,44 @@ def get_all_scantron_results(test_id):
             raise Exception("The test id does not exist: " + str(e))
 
         return ret
+
+#Scores an exam in the JSON format
+def scoreJson(test_id, exam_data, subject, name):
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+
+        answer_key_query = 'SELECT * FROM TEST_DATA WHERE subject = \'{}\''.format(subject)
+        answer_key = conn.execute(answer_key_query).fetchall()[0][2]
+        print ("answer_key: " + str(answer_key))
+
+        answer_key_json = json.loads(answer_key)
+        answer_key_set = answer_key_json.keys()
+        exam_data_json = json.loads(exam_data)
+        exam_data_keys = exam_data_json.keys()
+        score = 0
+        exam_comparison = {}
+        if set(answer_key_set) != set(exam_data_keys):
+            raise Exception("Exam data corrupt")
+        else:
+            for key in set(answer_key_set):
+                res = {}
+                if(exam_data_json[key] == answer_key_json[key]):
+                    score = score + 1
+                res["actual"] = exam_data_json[key]
+                res["expected"] = answer_key_json[key]
+
+                exam_comparison[key] = res
+        submission_result = {}
+        submission_result['scantron_id'] = test_id
+        submission_result['scantron_url'] = 'null'
+        submission_result['name'] = name
+        submission_result['subject'] = subject
+        submission_result['score'] = score
+        submission_result['result'] = exam_comparison
+
+        write_result_to_db(conn, submission_result)
+        conn.close()
+        return submission_result
+
+    except Exception as e:
+        raise Exception("Failed to get answer key: " + str(e))

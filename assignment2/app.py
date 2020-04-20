@@ -59,7 +59,7 @@ def createTest():
         return response, 201
     except Exception as e:
         print("Failed to create table or write to table: " + str(e))
-        return 500
+        return str(e), 500
 
 """
 Request
@@ -117,14 +117,39 @@ def uploadScantron(id):
 
     print("Scantron data: " + str(scantron_data))
 
+    try:
     #Do logic to upload scantron here
-    res = utilities.test_scantron(id, file_location, name, subject, scantron_data)
+        res = utilities.test_scantron(id, file_location, name, subject, scantron_data)
+    except Exception as e:
+        return str(e), 500
 
     response  = {}
     response['scantron_id'] = id
     response['scantron_url'] = res['scantron_url']
     response['name'] = name
     response['subject'] = subject
+    response['score'] = res['score']
+    response['result'] = res['result']
+
+    return response, 201
+
+@app.route('/api/tests/<id>/scoreJson', methods = ["POST"])
+def scoreJson(id):
+    test_id = id
+    name = request.args.get('name')
+    subject = request.args.get('subject')
+    exam = request.args.get('exam')
+    res = None
+    try:
+        res = utilities.scoreJson(test_id, exam, subject, name)
+    except Exception as e:
+        return str(e), 500
+
+    response  = {}
+    response['scantron_id'] = id
+    response['name'] = name
+    response['subject'] = subject
+    print(str(res))
     response['score'] = res['score']
     response['result'] = res['result']
 
@@ -177,7 +202,10 @@ Response
 def checkAllScantrons(id):
     #Do logic to scan scantron here
 
-    res = utilities.get_all_scantron_results(id)
+    try:
+        res = utilities.get_all_scantron_results(id)
+    except Exception as e:
+        return str(e), 500
 
     response  = {}
     response['test_id'] = res['test_id']
