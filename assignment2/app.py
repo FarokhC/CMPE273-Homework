@@ -1,12 +1,9 @@
-from flask import Flask, escape, request, Blueprint
+from flask import Flask, escape, request, Blueprint, send_file
 import os
 
 import utilities
 
 app = Flask(__name__)
-# UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), '/uploadFiles')
-# print("Upload folder: " + UPLOAD_FOLDER)
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 """
 Request
@@ -100,26 +97,20 @@ def uploadScantron(id):
     subject = request.args.get('subject')
     # scantron_data = request.args.get('BINARY_SCANTRON_PDF_FILE_DATA')
     scantron_data = request.files
+    save_location = '/files/'
+    scantron_url = "http://" + request.host + save_location
+    abs_file_location = None
     try:
-        # f = request.files['image']
-        # f.save(f.filename)
-        # print("reached here!!!")
-        pdf_file = request.files['image']
-        # print ("pdf file name: " + pdf_file)
-        # print ("Upload folder: " + app.config['UPLOAD_FOLDER'])
-        save_location = 'uploadFiles'
-        file_location = os.path.join(os.path.join(os.getcwd(), save_location), pdf_file.filename)
-        pdf_file.save(file_location)
+        json_file = request.files['file']
+        scantron_url = scantron_url + json_file.filename
+        abs_file_location = os.getcwd() + "/" + save_location + "/" + json_file.filename
+        json_file.save(abs_file_location)
 
     except Exception as e:
         print("Failed to upload file: " + str(e))
-
-
-    print("Scantron data: " + str(scantron_data))
-
     try:
     #Do logic to upload scantron here
-        res = utilities.test_scantron(id, file_location, name, subject, scantron_data)
+        res = utilities.test_scantron(id, abs_file_location, name, subject, scantron_data, scantron_url)
     except Exception as e:
         return str(e), 500
 
@@ -128,28 +119,6 @@ def uploadScantron(id):
     response['scantron_url'] = res['scantron_url']
     response['name'] = name
     response['subject'] = subject
-    response['score'] = res['score']
-    response['result'] = res['result']
-
-    return response, 201
-
-@app.route('/api/tests/<id>/scoreJson', methods = ["POST"])
-def scoreJson(id):
-    test_id = id
-    name = request.args.get('name')
-    subject = request.args.get('subject')
-    exam = request.args.get('exam')
-    res = None
-    try:
-        res = utilities.scoreJson(test_id, exam, subject, name)
-    except Exception as e:
-        return str(e), 500
-
-    response  = {}
-    response['scantron_id'] = id
-    response['name'] = name
-    response['subject'] = subject
-    print(str(res))
     response['score'] = res['score']
     response['result'] = res['result']
 
@@ -214,6 +183,17 @@ def checkAllScantrons(id):
     response['submissions'] = res['submissions']
 
     return response
+
+#Returns the file
+@app.route('/<path:file_location>')
+def dir_listing(file_location):
+    file_path = os.path.join(os.getcwd(), file_location)
+
+    if os.path.isfile(file_path):
+        return send_file(file_path)
+
+    else:
+        return "Could not find file: " + str(file_path), 404
 
 if __name__ == '__main__':
     app.run()

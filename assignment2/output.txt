@@ -1,0 +1,338 @@
+Request: POST: http://127.0.0.1:5000/api/tests?subject=Math&answer_key={"1": "A","2": "B","3": "C","4": "D","5": "A","6": "B","7": "C","8": "D","9": "A","10": "B","11": "A","12": "B","13": "C","14": "D","15": "A","16": "B","17": "C","18": "D","19": "A","20": "B","21": "A","22": "B","23": "C","24": "D","25": "A","26": "B","27": "C","28": "D","29": "A","30": "B","31": "A","32": "B","33": "C","34": "D","35": "A","36": "B","37": "C","38": "D","39": "A","40": "B","41": "A","42": "B","43": "C","44": "D","45": "A","46": "B","47": "C","48": "D","49": "A","50": "B"}
+Response:
+{
+    "name": "Foo Bar",
+    "subject": "Math",
+    "answers": {
+        "1": "A",
+        "2": "B",
+        "3": "C",
+        "4": "D",
+        "5": "A",
+        "6": "B",
+        "7": "C",
+        "8": "D",
+        "9": "A",
+        "10": "B",
+        "11": "A",
+        "12": "B",
+        "13": "C",
+        "14": "D",
+        "15": "A",
+        "16": "B",
+        "17": "C",
+        "18": "D",
+        "19": "A",
+        "20": "B",
+        "21": "A",
+        "22": "B",
+        "23": "C",
+        "24": "D",
+        "25": "A",
+        "26": "B",
+        "27": "C",
+        "28": "D",
+        "29": "A",
+        "30": "B",
+        "31": "A",
+        "32": "B",
+        "33": "C",
+        "34": "D",
+        "35": "A",
+        "36": "B",
+        "37": "C",
+        "38": "D",
+        "39": "A",
+        "40": "B",
+        "41": "A",
+        "42": "B",
+        "43": "C",
+        "44": "D",
+        "45": "A",
+        "46": "B",
+        "47": "C",
+        "48": "D",
+        "49": "A",
+        "50": "B"
+    }
+}
+
+Request: POST: http://127.0.0.1:5000/api/tests/2/scantrons?name=Lisa&subject=Math (body contains file upload)
+Response:
+{
+    "name": "Lisa",
+    "result": {
+        "1": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "10": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "11": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "12": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "13": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "14": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "15": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "16": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "17": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "18": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "19": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "2": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "20": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "21": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "22": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "23": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "24": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "25": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "26": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "27": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "28": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "29": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "3": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "30": {
+            "actual": "D",
+            "expected": "B"
+        },
+        "31": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "32": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "33": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "34": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "35": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "36": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "37": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "38": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "39": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "4": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "40": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "41": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "42": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "43": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "44": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "45": {
+            "actual": "C",
+            "expected": "A"
+        },
+        "46": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "47": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "48": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "49": {
+            "actual": "D",
+            "expected": "A"
+        },
+        "5": {
+            "actual": "A",
+            "expected": "A"
+        },
+        "50": {
+            "actual": "A",
+            "expected": "B"
+        },
+        "6": {
+            "actual": "B",
+            "expected": "B"
+        },
+        "7": {
+            "actual": "C",
+            "expected": "C"
+        },
+        "8": {
+            "actual": "D",
+            "expected": "D"
+        },
+        "9": {
+            "actual": "A",
+            "expected": "A"
+        }
+    },
+    "scantron_id": "2",
+    "scantron_url": "http://127.0.0.1:5000/files/scantron-1.json",
+    "score": 46,
+    "subject": "Math"
+}
+
+Request: GET: http://127.0.0.1:5000/api/tests/1
+Response:
+{
+    "answer_keys": "{\"1\": \"A\",\"2\": \"B\",\"3\": \"C\",\"4\": \"D\",\"5\": \"A\",\"6\": \"B\",\"7\": \"C\",\"8\": \"D\",\"9\": \"A\",\"10\": \"B\",\"11\": \"A\",\"12\": \"B\",\"13\": \"C\",\"14\": \"D\",\"15\": \"A\",\"16\": \"B\",\"17\": \"C\",\"18\": \"D\",\"19\": \"A\",\"20\": \"B\",\"21\": \"A\",\"22\": \"B\",\"23\": \"C\",\"24\": \"D\",\"25\": \"A\",\"26\": \"B\",\"27\": \"C\",\"28\": \"D\",\"29\": \"A\",\"30\": \"B\",\"31\": \"A\",\"32\": \"B\",\"33\": \"C\",\"34\": \"D\",\"35\": \"A\",\"36\": \"B\",\"37\": \"C\",\"38\": \"D\",\"39\": \"A\",\"40\": \"B\",\"41\": \"A\",\"42\": \"B\",\"43\": \"C\",\"44\": \"D\",\"45\": \"A\",\"46\": \"B\",\"47\": \"C\",\"48\": \"D\",\"49\": \"A\",\"50\": \"B\"}",
+    "subject": "Math",
+    "submissions": "[{'scantron_id': '1', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Bob', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '1', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Bob', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 50, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'A', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'B', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'B', 'expected': 'B'}, '45': {'actual': 'A', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 46, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'D', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'D', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'A', 'expected': 'B'}, '45': {'actual': 'C', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}, {'scantron_id': '2', 'scantron_url': 'http://127.0.0.1:5000/files/scantron-1.json', 'name': 'Lisa', 'subject': 'Math', 'score': 46, 'result': {'20': {'actual': 'B', 'expected': 'B'}, '40': {'actual': 'B', 'expected': 'B'}, '3': {'actual': 'C', 'expected': 'C'}, '16': {'actual': 'B', 'expected': 'B'}, '1': {'actual': 'A', 'expected': 'A'}, '34': {'actual': 'D', 'expected': 'D'}, '23': {'actual': 'C', 'expected': 'C'}, '36': {'actual': 'B', 'expected': 'B'}, '12': {'actual': 'B', 'expected': 'B'}, '5': {'actual': 'A', 'expected': 'A'}, '31': {'actual': 'A', 'expected': 'A'}, '37': {'actual': 'C', 'expected': 'C'}, '38': {'actual': 'D', 'expected': 'D'}, '14': {'actual': 'D', 'expected': 'D'}, '46': {'actual': 'B', 'expected': 'B'}, '19': {'actual': 'A', 'expected': 'A'}, '29': {'actual': 'A', 'expected': 'A'}, '47': {'actual': 'C', 'expected': 'C'}, '21': {'actual': 'A', 'expected': 'A'}, '41': {'actual': 'A', 'expected': 'A'}, '49': {'actual': 'D', 'expected': 'A'}, '17': {'actual': 'C', 'expected': 'C'}, '42': {'actual': 'B', 'expected': 'B'}, '15': {'actual': 'A', 'expected': 'A'}, '39': {'actual': 'A', 'expected': 'A'}, '26': {'actual': 'B', 'expected': 'B'}, '6': {'actual': 'B', 'expected': 'B'}, '25': {'actual': 'A', 'expected': 'A'}, '33': {'actual': 'C', 'expected': 'C'}, '32': {'actual': 'B', 'expected': 'B'}, '7': {'actual': 'C', 'expected': 'C'}, '22': {'actual': 'B', 'expected': 'B'}, '27': {'actual': 'C', 'expected': 'C'}, '30': {'actual': 'D', 'expected': 'B'}, '44': {'actual': 'D', 'expected': 'D'}, '11': {'actual': 'A', 'expected': 'A'}, '4': {'actual': 'D', 'expected': 'D'}, '43': {'actual': 'C', 'expected': 'C'}, '18': {'actual': 'D', 'expected': 'D'}, '35': {'actual': 'A', 'expected': 'A'}, '50': {'actual': 'A', 'expected': 'B'}, '45': {'actual': 'C', 'expected': 'A'}, '24': {'actual': 'D', 'expected': 'D'}, '48': {'actual': 'D', 'expected': 'D'}, '2': {'actual': 'B', 'expected': 'B'}, '8': {'actual': 'D', 'expected': 'D'}, '13': {'actual': 'C', 'expected': 'C'}, '28': {'actual': 'D', 'expected': 'D'}, '10': {'actual': 'B', 'expected': 'B'}, '9': {'actual': 'A', 'expected': 'A'}}}]",
+    "test_id": 1
+}
+
+Request: GET: http://127.0.0.1:5000/files/scantron-1.json
+Response:
+{
+    "name": "Foo Bar",
+    "subject": "Math",
+    "answers": {
+        "1": "A",
+        "2": "B",
+        "3": "C",
+        "4": "D",
+        "5": "A",
+        "6": "B",
+        "7": "C",
+        "8": "D",
+        "9": "A",
+        "10": "B",
+        "11": "A",
+        "12": "B",
+        "13": "C",
+        "14": "D",
+        "15": "A",
+        "16": "B",
+        "17": "C",
+        "18": "D",
+        "19": "A",
+        "20": "B",
+        "21": "A",
+        "22": "B",
+        "23": "C",
+        "24": "D",
+        "25": "A",
+        "26": "B",
+        "27": "C",
+        "28": "D",
+        "29": "A",
+        "30": "B",
+        "31": "A",
+        "32": "B",
+        "33": "C",
+        "34": "D",
+        "35": "A",
+        "36": "B",
+        "37": "C",
+        "38": "D",
+        "39": "A",
+        "40": "B",
+        "41": "A",
+        "42": "B",
+        "43": "C",
+        "44": "D",
+        "45": "A",
+        "46": "B",
+        "47": "C",
+        "48": "D",
+        "49": "A",
+        "50": "B"
+    }
+}

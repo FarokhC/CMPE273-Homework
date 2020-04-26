@@ -61,7 +61,7 @@ def get_database_contents(conn):
         print ("database " + str(res))
 
 #Compares the scantron to the answer key
-def test_scantron(id, scantron_url, name, subject, scantron_data):
+def test_scantron(id, file_location, name, subject, scantron_data, scantron_url):
     submission_result = {}
     try:
         conn = sqlite3.connect(DATABASE_FILE)
@@ -74,10 +74,10 @@ def test_scantron(id, scantron_url, name, subject, scantron_data):
         answer_key = conn.execute(answer_key_query).fetchall()[0][2]
         print ("answer_key: " + str(answer_key))
 
-        res = get_scantron_results(scantron_data, answer_key)
+        res = get_scantron_results(file_location, scantron_data, answer_key, id, subject, name, scantron_url)
 
         submission_result['scantron_id'] = id
-        submission_result['scantron_url'] = scantron_url
+        submission_result['scantron_url'] = res['scantron_url']
         submission_result['name'] = name
         submission_result['subject'] = subject
         submission_result['score'] = res['score']
@@ -97,13 +97,45 @@ def test_scantron(id, scantron_url, name, subject, scantron_data):
 
     return submission_result
 
-#Runs OCR and gets the scantron results
-def get_scantron_results(scantron_data, answer_key):
-    #TODO: Implement this function using OCR
-    return {
-        'result': {},
-        'score': 100,
-    }
+#Retreives and returns the scantron test results
+def get_scantron_results(file_location, scantron_data, answer_key, test_id, subject, name, scantron_url):
+    try:
+        exam_data = None
+        with open(file_location, 'r') as file:
+            exam_data = file.read()
+        conn = sqlite3.connect(DATABASE_FILE)
+        answer_key_query = 'SELECT * FROM TEST_DATA WHERE subject = \'{}\''.format(subject)
+        answer_key = conn.execute(answer_key_query).fetchall()[0][2]
+        answer_key_json = json.loads(answer_key)
+        answer_key_set = answer_key_json.keys()
+        exam_data_json = json.loads(exam_data)
+        exam_data_json = exam_data_json['answers']
+        exam_data_keys = exam_data_json.keys()
+        score = 0
+        exam_comparison = {}
+        if set(answer_key_set) != set(exam_data_keys):
+            raise Exception("Scantron question numbers do not match answer key question numbers")
+        else:
+            for key in set(answer_key_set):
+                res = {}
+                if(exam_data_json[key] == answer_key_json[key]):
+                    score = score + 1
+                res["actual"] = exam_data_json[key]
+                res["expected"] = answer_key_json[key]
+                exam_comparison[key] = res
+        submission_result = {}
+        submission_result['scantron_id'] = test_id
+        submission_result['scantron_url'] = scantron_url
+        submission_result['name'] = name
+        submission_result['subject'] = subject
+        submission_result['score'] = score
+        submission_result['result'] = exam_comparison
+        write_result_to_db(conn, submission_result)
+        conn.close()
+        return submission_result
+
+    except Exception as e:
+        raise Exception("Failed to get results: " + str(e))
 
 def write_result_to_db(conn, result):
     try:
@@ -150,44 +182,3 @@ def get_all_scantron_results(test_id):
             raise Exception("The test id does not exist: " + str(e))
 
         return ret
-
-#Scores an exam in the JSON format
-def scoreJson(test_id, exam_data, subject, name):
-    try:
-        conn = sqlite3.connect(DATABASE_FILE)
-
-        answer_key_query = 'SELECT * FROM TEST_DATA WHERE subject = \'{}\''.format(subject)
-        answer_key = conn.execute(answer_key_query).fetchall()[0][2]
-        print ("answer_key: " + str(answer_key))
-
-        answer_key_json = json.loads(answer_key)
-        answer_key_set = answer_key_json.keys()
-        exam_data_json = json.loads(exam_data)
-        exam_data_keys = exam_data_json.keys()
-        score = 0
-        exam_comparison = {}
-        if set(answer_key_set) != set(exam_data_keys):
-            raise Exception("Exam data corrupt")
-        else:
-            for key in set(answer_key_set):
-                res = {}
-                if(exam_data_json[key] == answer_key_json[key]):
-                    score = score + 1
-                res["actual"] = exam_data_json[key]
-                res["expected"] = answer_key_json[key]
-
-                exam_comparison[key] = res
-        submission_result = {}
-        submission_result['scantron_id'] = test_id
-        submission_result['scantron_url'] = 'null'
-        submission_result['name'] = name
-        submission_result['subject'] = subject
-        submission_result['score'] = score
-        submission_result['result'] = exam_comparison
-
-        write_result_to_db(conn, submission_result)
-        conn.close()
-        return submission_result
-
-    except Exception as e:
-        raise Exception("Failed to get answer key: " + str(e))

@@ -1,4 +1,18 @@
 # Assignment 2
+===============================================================================
+## For the grader:
+* Postman collection: https://www.getpostman.com/collections/6d866e0a1734b3ed1bca
+
+Please view screenshots in the /screenshots directory and output in output.txt
+
+
+
+
+
+
+
+
+===============================================================================
 
 In the assignment 2, you will be building a scantron OCR application in Python Flask. The application handles:
 
@@ -47,7 +61,7 @@ _Response_
         "49": "D",
         "50": "E"
     },
-    "submissions": [] 
+    "submissions": []
 }
 ```
 
@@ -60,8 +74,7 @@ _Request_
 
 
 ```
-# HTTP Request Body
-BINARY_SCANTRON_PDF_FILE_DATA
+curl -F 'data=@path/to/local/scantron-1.json' http://localhost:5000/api/tests/1/scantrons
 ```
 
 _Response_
@@ -71,7 +84,7 @@ _Response_
 
 {
     "scantron_id": 1,
-    "scantron_url": "http://localhost:5000/files/1.pdf",
+    "scantron_url": "http://localhost:5000/files/scantron-1.json",
     "name": "Foo Bar",
     "subject": "Math",
     "score": 40,
@@ -135,12 +148,11 @@ _Response_
                 }
             }
         }
-    ] 
+    ]
 }
 ```
 
 
 ![](scantron-100.jpg)
-
 
 
