@@ -3,7 +3,7 @@ import socket
 
 from sample_data import USERS
 from server_config import NODES
-from pickle_hash import serialize_GET, serialize_PUT
+from pickle_hash import serialize_GET, serialize_PUT, serialize_DELETE
 import node_ring
 
 BUFFER_SIZE = 1024
@@ -27,6 +27,21 @@ class UDPClient():
 
 def process(udp_clients):
     hash_codes = set()
+
+    put(hash_codes)
+
+    print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
+
+    get(hash_codes)
+
+    delete(hash_codes)
+
+    print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
+
+def lru_cache(func, cache_size):
+    return None
+
+def put(hash_codes):
     # PUT all users.
     for u in USERS:
         data_bytes, key = serialize_PUT(u)
@@ -39,13 +54,13 @@ def process(udp_clients):
         hash_codes.add(response)
         print(response)
 
-    print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
-
+def get(hash_codes):
     # TODO: PART I
     # GET all users.
     for hc in hash_codes:
         print(hc)
         data_bytes, key = serialize_GET(hc)
+        print('get keu: ' + str(key))
         nr = node_ring.NodeRing(NODES)
         node = nr.get_node(key)
 
@@ -53,6 +68,18 @@ def process(udp_clients):
         response = client.send(data_bytes)
         print(str(response))
 
+def delete(hash_codes):
+    # Delete all users
+    for hc in hash_codes:
+        print(hc)
+        data_bytes, key = serialize_DELETE(hc)
+        print('get key: ' + str(key))
+        nr = node_ring.NodeRing(NODES)
+        node = nr.get_node(key)
+
+        client = UDPClient(node['host'], node['port'])
+        response = client.send(data_bytes)
+        print(str(response))
 
 if __name__ == "__main__":
     clients = [
