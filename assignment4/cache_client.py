@@ -31,13 +31,15 @@ def process(udp_clients):
     for u in USERS:
         data_bytes, key = serialize_PUT(u)
         # TODO: PART II - Instead of going to server 0, use Naive hashing to split data into multiple servers
-        nr = node_ring.NodeRing(NODES)
+        nr = node_ring.NodeRingConsistentHashing(NODES)
         node = nr.get_node(key)
 
-        client = UDPClient(node['host'], node['port'])
-        response = client.send(data_bytes)
-        hash_codes.add(response)
-        print(response)
+        for n in node:
+            print("N: " + str(n))
+            client = UDPClient(n['host'], n['port'])
+            response = client.send(data_bytes)
+            hash_codes.add(response)
+            print(response)
 
     print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
 
@@ -46,12 +48,13 @@ def process(udp_clients):
     for hc in hash_codes:
         print(hc)
         data_bytes, key = serialize_GET(hc)
-        nr = node_ring.NodeRing(NODES)
+        nr = node_ring.NodeRingConsistentHashing(NODES)
         node = nr.get_node(key)
 
-        client = UDPClient(node['host'], node['port'])
-        response = client.send(data_bytes)
-        print(str(response))
+        for n in node:
+            client = UDPClient(n['host'], n['port'])
+            response = client.send(data_bytes)
+            print(str(response))
 
 
 if __name__ == "__main__":
