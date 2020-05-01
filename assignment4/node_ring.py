@@ -1,5 +1,4 @@
 import hashlib
-import numpy
 
 from server_config import NODES
 
@@ -49,34 +48,43 @@ class NodeRingConsistentHashing():
         self.nodes = nodes
 
     def get_node(self, key_hex):
+        virtual_nodes = 8
         m = (2**32) - 1
 
-        node_index = [None]*len(self.nodes)
-        for i in range(len(self.nodes)):
-            node_index[i] = hash(self.nodes[i]['port']) % m
-        key_index = hash(key_hex)
+        node_index = [None]*virtual_nodes
+        for i in range(len(node_index)):
+            node_index[i] = int(hashlib.md5((str(i)).encode()).hexdigest(), 16) % m
+        key_index = int(hashlib.md5(str(key_hex).encode()).hexdigest(), 16)
 
         #calculate closest node
-        deltas = [None]*len(node_index)
-        for i in range(len(node_index)):
+        deltas = [None]*virtual_nodes
+        for i in range(virtual_nodes):
             deltas[i] = abs(key_index - node_index[i])
         node_index = deltas.index(min(deltas))
-        print("Index: " + str(node_index))
 
-        #virtual node layer and data replication
-        physical_nodes = [
-            [0, 2],
-            [1, 3]
+        #Virtual node layer and replication
+        virtual_to_physical_with_replication = [
+            [0, 1],
+            [2, 3],
+            [4, 5],
+            [6, 7]
         ]
         ret_nodes = None
-        #use physical nodes 0 and 2
-        if(node_index <= 1):
-            ret_nodes = physical_nodes[0]
-        #use physical onodes 1 and 3
-        else:
-            ret_nodes = physical_nodes[1]
+        if(node_index == 0 or node_index == 1):
+            ret_nodes = 0
+        elif(node_index == 2 or node_index == 3):
+            ret_nodes = 1
+        elif(node_index == 4 or node_index == 5):
+            ret_nodes = 2
+        elif(node_index == 6 or node_index == 7):
+            ret_nodes = 3
 
-        return self.nodes[ret_nodes[0]], self.nodes[ret_nodes[1]]
+
+        first_node = ret_nodes
+        second_node = (ret_nodes + 1) % 4
+
+        print("Ret nodes: " + str(self.nodes[first_node]) +  str(self.nodes[second_node]))
+        return self.nodes[first_node], self.nodes[second_node]
 
 def test():
     ring = NodeRing(nodes=NODES)
