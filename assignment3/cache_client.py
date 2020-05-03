@@ -10,8 +10,36 @@ from bloom_filter import BloomFilter
 
 BUFFER_SIZE = 1024
 bloomFilter = BloomFilter()
+cache = []
 
-lru_cache = []
+def add_to_lru_cache(data):
+    try:
+        cache.append(cache.pop(0))
+    except:
+        print("cache empty")
+    cache.append(data)
+
+def get_lru_cache(data):
+    try:
+        for i in range (0, len(cache)):
+            if(cache[i][0]['key'] == data.decode("utf-8")):
+                return cache[i]
+    except Exception as e:
+        print(str(e))
+        return False
+    return False
+
+def delete_lru_cache(data):
+    try:
+        for i in range (0, len(cache)):
+            if(cache[i][0]['key'] == data.decode("utf-8")):
+                cache[i].pop(i)
+
+        return True
+    except Exception as e:
+        print(str(e))
+        return False
+    return False
 
 class UDPClient():
     def __init__(self, host, port):
@@ -34,13 +62,16 @@ class UDPClient():
 def process(udp_clients):
     hash_codes = set()
 
-    put(hash_codes)
+    for u in USERS:
+        put(hash_codes, u)
 
     print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
 
-    get(hash_codes)
+    for hc in hash_codes:
+        get(hc)
 
-    delete(hash_codes)
+    for hc in hash_codes:
+        delete(hc)
 
     print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
 
@@ -49,70 +80,77 @@ def process(udp_clients):
 def lru_cache(*args, **kwargs):
     def wrapper(func):
         def f(*args):
-            print("func: " + str(func.__name__))
             func_name = func.__name__
-            hashcodes = args[0]
-            print("hashcodes: " + str(hashcodes))
+            hash_codes = args[0]
             if(func_name == 'put'):
-                return func(hashcodes)
+                user = args[1]
+                data_bytes, key = serialize_PUT(user)
+                data = [{'key': key}, {'data_bytes': data_bytes}]
+                add_to_lru_cache(data)
+                return func(hash_codes, user, key, data_bytes)
             elif(func_name == 'get'):
-                return func(hashcodes)
+                for i in range(0, len(cache)):
+                    data_bytes, key = serialize_GET(hash_codes)
+                    data = get_lru_cache(key)
+                    if(data == False):
+                        return func(hash_codes, data_bytes, key)
+                    else:
+                        print("Local LRU Cache Response: " + str(data) + "\n")
             elif(func_name == 'delete'):
-                return func(hashcodes)
-            print("hashcodes: " + str(hashcodes))
+                for i in range(0, len(cache)):
+                    data_bytes, key = serialize_GET(hash_codes)
+                    data = delete_lru_cache(key)
+                    if(data == False):
+                        print("{} not in cache for delete operation".format(str(key)))
+                    else:
+                        print("Deleted {} from cache".format(str(key)))
+                    return func(hash_codes, data_bytes, key)
+            print("hashcodes: " + str(hash_codes))
 
         return f
     return wrapper
 
 @lru_cache(5)
-def put(hash_codes):
+def put(hash_codes, user, key, data_bytes):
     # PUT all users.
-    for u in USERS:
-        data_bytes, key = serialize_PUT(u)
-        bloomFilter.add(key)
-        # TODO: PART II - Instead of going to server 0, use Naive hashing to split data into multiple servers
-        nr = node_ring.NodeRing(NODES)
-        node = nr.get_node(key)
-        client = UDPClient(node['host'], node['port'])
-        response = client.send(data_bytes)
-        hash_codes.add(response)
-        print(response)
+    bloomFilter.add(key)
+    # TODO: PART II - Instead of going to server 0, use Naive hashing to split data into multiple servers
+    nr = node_ring.NodeRing(NODES)
+    node = nr.get_node(key)
+    client = UDPClient(node['host'], node['port'])
+    response = client.send(data_bytes)
+    hash_codes.add(response)
+    print(response)
 
 @lru_cache(5)
-def get(hash_codes):
+def get(hash_code, data_bytes, key):
     # TODO: PART I
     # GET all users.
-    for hc in hash_codes:
-        print(hc)
-        data_bytes, key = serialize_GET(hc)
-        print('get key: ' + str(key))
-        nr = node_ring.NodeRing(NODES)
-        node = nr.get_node(key)
-
-        if(bloomFilter.is_member(key)):
-            print("in cache")
-            client = UDPClient(node['host'], node['port'])
-            response = client.send(data_bytes)
-        else:
-            response = "Key {} not found in Bloom Filter for get request".format(key)
-        print(str(response))
+    print(hash_code)
+    nr = node_ring.NodeRing(NODES)
+    node = nr.get_node(key)
+    if(bloomFilter.is_member(key)):
+        print("in cache")
+        client = UDPClient(node['host'], node['port'])
+        response = client.send(data_bytes)
+    else:
+        response = "Key {} not found in Bloom Filter for get request".format(key)
+    print(str(response))
 
 @lru_cache(5)
-def delete(hash_codes):
+def delete(hash_code, data_bytes, key):
     # Delete all users
-    for hc in hash_codes:
-        print(hc)
-        data_bytes, key = serialize_DELETE(hc)
-        print('delete key: ' + str(key))
-        nr = node_ring.NodeRing(NODES)
-        node = nr.get_node(key)
-
-        if(bloomFilter.is_member(key)):
-            client = UDPClient(node['host'], node['port'])
-            response = client.send(data_bytes)
-        else:
-            response = "Key {} not found in Bloom Filter for delete request".format(key)
-        print(str(response))
+    print(hash_code)
+    data_bytes, key = serialize_DELETE(hash_code)
+    print('delete key: ' + str(key))
+    nr = node_ring.NodeRing(NODES)
+    node = nr.get_node(key)
+    if(bloomFilter.is_member(key)):
+        client = UDPClient(node['host'], node['port'])
+        response = client.send(data_bytes)
+    else:
+        response = "Key {} not found in Bloom Filter for delete request".format(key)
+    print(str(response))
 
 if __name__ == "__main__":
     clients = [
