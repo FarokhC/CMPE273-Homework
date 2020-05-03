@@ -18,6 +18,14 @@ class MyDict(dict):
         val = key.decode()
         ret = self[val]
         return ret
+    def delete(self, id):
+        try:
+            print("Before self: " + str(self))
+            del self[id.decode()]
+            print("After self: " + str(self))
+
+        except KeyError:
+            print("Key {} not found".format(str(id)))
 
 class UDPServer():
     def __init__(self, host, port):
@@ -46,10 +54,15 @@ class UDPServer():
             return self.db.get(key)
         elif operation == 'PUT':
             return self.db.put(key, value)
+        elif operation == 'DELETE':
+            try:
+                self.db.delete(key)
+                return 'success'
+            except KeyError:
+                return 'Key not found'
         else:
             print(f'Error: Invalid operation={operation}')
             return 'Not supported operation={}'.format(operation)
-
 
     def run(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
