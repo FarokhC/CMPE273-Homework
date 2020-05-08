@@ -63,7 +63,7 @@ def put(hash_code, data_bytes, key):
     # PUT all users.
     bloomFilter.add(key)
     # TODO: PART II - Instead of going to server 0, use Naive hashing to split data into multiple servers
-    nr = node_ring.NodeRing(NODES)
+    nr = node_ring.NodeRingRendezvous(NODES)
     print("put key: " + str(key))
     node = nr.get_node(key)
     client = UDPClient(node['host'], node['port'])
@@ -77,7 +77,7 @@ def get(key, data_bytes, hashcode):
     # GET all users.
     print("ke: " + str(key))
 
-    nr = node_ring.NodeRing(NODES)
+    nr = node_ring.NodeRingRendezvous(NODES)
     print('key: ' + str(key))
     node = nr.get_node(key)
     if(bloomFilter.is_member(key)):
@@ -93,7 +93,7 @@ def delete(hash_code, data_bytes, key):
     print(hash_code)
     data_bytes, key = serialize_DELETE(hash_code)
     print('delete key: ' + str(key))
-    nr = node_ring.NodeRing(NODES)
+    nr = node_ring.NodeRingRendezvous(NODES)
     node = nr.get_node(key)
     if(bloomFilter.is_member(key)):
         client = UDPClient(node['host'], node['port'])
