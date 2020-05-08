@@ -7,39 +7,13 @@ from server_config import NODES
 from pickle_hash import serialize_GET, serialize_PUT, serialize_DELETE
 import node_ring
 from bloom_filter import BloomFilter
+from lru_cache import lru_cache
+import hashlib
 
 BUFFER_SIZE = 1024
-bloomFilter = BloomFilter()
-cache = []
-
-def add_to_lru_cache(data):
-    try:
-        cache.append(cache.pop(0))
-    except:
-        print("cache empty")
-    cache.append(data)
-
-def get_lru_cache(data):
-    try:
-        for i in range (0, len(cache)):
-            if(cache[i][0]['key'] == data.decode("utf-8")):
-                return cache[i]
-    except Exception as e:
-        print(str(e))
-        return False
-    return False
-
-def delete_lru_cache(data):
-    try:
-        for i in range (0, len(cache)):
-            if(cache[i][0]['key'] == data.decode("utf-8")):
-                cache[i].pop(i)
-
-        return True
-    except Exception as e:
-        print(str(e))
-        return False
-    return False
+NUM_KEYS = 20
+FALSE_POSITIVE_PROBABILITY = 0.05
+bloomFilter = BloomFilter(NUM_KEYS, FALSE_POSITIVE_PROBABILITY)
 
 class UDPClient():
     def __init__(self, host, port):
@@ -63,71 +37,48 @@ def process(udp_clients):
     hash_codes = set()
 
     for u in USERS:
-        put(hash_codes, u)
+        data_bytes, key = serialize_PUT(u)
+        put(hash_codes, data_bytes, key)
 
     print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
 
     for hc in hash_codes:
-        get(hc)
+        data_bytes, key = serialize_GET(u)
+        print('ley: ' + str(key))
+        hash_code = hashlib.md5(str(key).encode())
+        hash_val = hash_code.hexdigest()
+        print("hash val: " + str(hash_val))
+        get(hash_val, data_bytes, hash_codes)
 
     for hc in hash_codes:
-        delete(hc)
+        data_bytes, key = serialize_DELETE(u)
+        delete(hc, data_bytes, key)
 
     print(f"Number of Users={len(USERS)}\nNumber of Users Cached={len(hash_codes)}")
 
     print("Done!")
 
-def lru_cache(*args, **kwargs):
-    def wrapper(func):
-        def f(*args):
-            func_name = func.__name__
-            hash_codes = args[0]
-            if(func_name == 'put'):
-                user = args[1]
-                data_bytes, key = serialize_PUT(user)
-                data = [{'key': key}, {'data_bytes': data_bytes}]
-                add_to_lru_cache(data)
-                return func(hash_codes, user, key, data_bytes)
-            elif(func_name == 'get'):
-                for i in range(0, len(cache)):
-                    data_bytes, key = serialize_GET(hash_codes)
-                    data = get_lru_cache(key)
-                    if(data == False):
-                        return func(hash_codes, data_bytes, key)
-                    else:
-                        print("Local LRU Cache Response: " + str(data) + "\n")
-            elif(func_name == 'delete'):
-                for i in range(0, len(cache)):
-                    data_bytes, key = serialize_GET(hash_codes)
-                    data = delete_lru_cache(key)
-                    if(data == False):
-                        print("{} not in cache for delete operation".format(str(key)))
-                    else:
-                        print("Deleted {} from cache".format(str(key)))
-                    return func(hash_codes, data_bytes, key)
-            print("hashcodes: " + str(hash_codes))
 
-        return f
-    return wrapper
-
-@lru_cache(5)
-def put(hash_codes, user, key, data_bytes):
+def put(hash_code, data_bytes, key):
     # PUT all users.
     bloomFilter.add(key)
     # TODO: PART II - Instead of going to server 0, use Naive hashing to split data into multiple servers
     nr = node_ring.NodeRing(NODES)
+    print("put key: " + str(key))
     node = nr.get_node(key)
     client = UDPClient(node['host'], node['port'])
     response = client.send(data_bytes)
-    hash_codes.add(response)
+    hash_code.add(response)
     print(response)
 
 @lru_cache(5)
-def get(hash_code, data_bytes, key):
+def get(key, data_bytes, hashcode):
     # TODO: PART I
     # GET all users.
-    print(hash_code)
+    print("ke: " + str(key))
+
     nr = node_ring.NodeRing(NODES)
+    print('key: ' + str(key))
     node = nr.get_node(key)
     if(bloomFilter.is_member(key)):
         print("in cache")
@@ -137,7 +88,6 @@ def get(hash_code, data_bytes, key):
         response = "Key {} not found in Bloom Filter for get request".format(key)
     print(str(response))
 
-@lru_cache(5)
 def delete(hash_code, data_bytes, key):
     # Delete all users
     print(hash_code)
